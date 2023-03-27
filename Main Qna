@@ -1,0 +1,69 @@
+class Course:
+  def __init__(self,*i):
+    self.ap={}
+    self.main={}
+    self.id=i[0]
+    if "a" in self.id:
+      self.ap[self.id]=[]
+      for x in range(2,len(i)):
+        self.ap[self.id].append(i[x])
+      if len(self.ap[self.id])%2!=0:
+        ing1=self.ap[self.id]
+        ing1=ing1[-1]
+        ing1=ing1.split(' ')
+        ing1=ing1[0]
+        self.ap[self.id].append(ing1)
+    elif 'm' in self.id:
+      self.main[self.id]=[]
+      for j in range(2,len(i)):
+        self.main[self.id].append(i[j]) 
+      if len(self.main[self.id])%2!=0:
+        ing=self.main[self.id]
+        ing=ing[-1]
+        ing=ing.split(' ')
+        ing=ing[0]
+        self.main[self.id].append(ing)
+
+class Meal:
+  def __init__(self,a):
+    plan=a
+    self.main1={}
+    self.app={}
+  def addCourse(self,c):
+    self.main1.update(c.main)
+    self.app.update(c.ap)
+  def showCourseByNo(self,id):
+    if "a" in id:
+      print("Course No:",id)
+      print("Name: Appetizers")
+      print("Dish:",self.app[id][-2])
+      return f"Ingridients: {self.app[id][-1]}"
+    elif "m" in id:
+      print("Course No:",id)
+      print("Name: Main")
+      print("Dish:",self.main1[id][-2])
+      return (f"Ingridients: {self.main1[id][-1]}")  
+  def allAppetizers(self):
+    print("Number of appetizers",len(self.app))
+    print(self.app)
+  def allMainCourses(self):
+    print("Number of Main Meal",len(self.main1))     
+    print(self.main1)
+course = Meal("We need help with ourMeal plan")
+c1 = Course("a23", "Appetizer", "ThaiSoup", "Prawns")
+course.addCourse(c1)
+print(".......................")
+print(course.showCourseByNo("a23"))
+print(".......................")
+c2 = Course("m102", "Main Course","Beef Steak" )
+course.addCourse(c2)
+print(".......................")
+print(course.showCourseByNo("m102"))
+print(".......................")
+c3 = Course("a44", "Appetizer","Mushroom Soup")
+course.addCourse(c3)
+print(".......................")
+print(course.showCourseByNo("a44"))
+print(".......................")
+course.allAppetizers()
+course.allMainCourses()
